@@ -40,6 +40,9 @@
     <Filter Include="Header Files\GameRelated\Event">
       <UniqueIdentifier>{7092f79f-229b-44cc-90be-08d389b1c8d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameRelated\Game">
+      <UniqueIdentifier>{0fbdcd9e-aac2-47d0-911b-9cfa54ab21bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vocation.h">
@@ -71,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Header Files\GameRelated\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\GameRelated\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +110,15 @@
     <ClCompile Include="Event.cpp">
       <Filter>Header Files\GameRelated\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Header Files\GameRelated\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Vocations.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Events.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

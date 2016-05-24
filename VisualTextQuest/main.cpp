@@ -16,14 +16,20 @@
 #include "Vocation.h"
 #include "Event.h"
 #include "EnemyFactory.h"
+#include "Game.h"
 
 //------------------------------------------------
 // Global variables like these would ideally be data members within a separate 'Game' class
 //------------------------------------------------
-Player* player;
+/*Player* player;
 vector<Vocation*> vocations;
-vector<Event*> events;
+vector<Event*> events;*/
 //------------------------------------------------
+
+Game game;
+Player* player = game.getPlayer();
+vector<Vocation*> vocations = game.getVocations();
+vector<Event*> events = game.getEvents();
 
 void main() {
 
@@ -42,6 +48,8 @@ void startGame() {
 	string vocation, description;
 	int health, strength, magic, healthModifier;
 	char comma, continueChoice;
+
+
 
 	//Iterates through the vocations text file and stores each vocation in a vector as an object
 	myfile.open("vocations.txt");

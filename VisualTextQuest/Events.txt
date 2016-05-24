@@ -1,0 +1,4 @@
+You found a health potion!,25
+You are feeling lucky today!, 100
+You decide to rest and heal your wounds!, 50
+You tripped and fell on your own weapon..., -25

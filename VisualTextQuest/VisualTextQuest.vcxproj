@@ -116,6 +116,7 @@
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="GiantSpider.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Player.h" />
@@ -131,9 +132,11 @@
     <ClCompile Include="GiantSpider.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Vocation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Events.txt" />
     <Text Include="Vocations.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
