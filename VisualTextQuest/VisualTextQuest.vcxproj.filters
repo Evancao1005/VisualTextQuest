@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\CharacterBased">
+      <UniqueIdentifier>{a02e1372-65a3-4363-a735-0d957c14dd21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CharacterBased\Enemy">
+      <UniqueIdentifier>{69fec717-ea2c-4abb-8d9a-597db9d20ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CharacterBased\Player">
+      <UniqueIdentifier>{0d656da1-a759-42af-a93a-e12fadc00c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CharacterBased\Enemy\GiantSpider">
+      <UniqueIdentifier>{c72fb153-4721-4919-9479-fd42b1971fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CharacterBased\Enemy\Orc">
+      <UniqueIdentifier>{c65ca3fc-ebb8-460c-ae54-e06584dc8c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CharacterBased\Enemy\Dragon">
+      <UniqueIdentifier>{865a51cb-cef3-47d7-8ab6-7baf7d0881ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameRelated">
+      <UniqueIdentifier>{4926e500-2937-4f9c-8f2f-37b88541c052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameRelated\EnemyFactory">
+      <UniqueIdentifier>{bcf1b4a4-524a-44bb-8f10-f8c89a7b3620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameRelated\Event">
+      <UniqueIdentifier>{7092f79f-229b-44cc-90be-08d389b1c8d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Vocation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\CharacterBased\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\CharacterBased\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GiantSpider.h">
+      <Filter>Header Files\CharacterBased\Enemy\GiantSpider</Filter>
+    </ClInclude>
+    <ClInclude Include="Orc.h">
+      <Filter>Header Files\CharacterBased\Enemy\Orc</Filter>
+    </ClInclude>
+    <ClInclude Include="Dragon.h">
+      <Filter>Header Files\CharacterBased\Enemy\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\CharacterBased</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
+      <Filter>Header Files\GameRelated\EnemyFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\GameRelated\Event</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Vocation.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Header Files\CharacterBased\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Header Files\CharacterBased\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantSpider.cpp">
+      <Filter>Header Files\CharacterBased\Enemy\GiantSpider</Filter>
+    </ClCompile>
+    <ClCompile Include="Orc.cpp">
+      <Filter>Header Files\CharacterBased\Enemy\Orc</Filter>
+    </ClCompile>
+    <ClCompile Include="Dragon.cpp">
+      <Filter>Header Files\CharacterBased\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Header Files\CharacterBased</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
+      <Filter>Header Files\GameRelated\EnemyFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Header Files\GameRelated\Event</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Vocations.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
