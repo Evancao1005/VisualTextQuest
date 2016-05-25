@@ -18,14 +18,6 @@
 #include "EnemyFactory.h"
 #include "Game.h"
 
-//------------------------------------------------
-// Global variables like these would ideally be data members within a separate 'Game' class
-//------------------------------------------------
-/*Player* player;
-vector<Vocation*> vocations;
-vector<Event*> events;*/
-//------------------------------------------------
-
 Game game;
 Player* player = game.getPlayer();
 vector<Vocation*> vocations = game.getVocations();

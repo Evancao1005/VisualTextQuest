@@ -1,0 +1,2 @@
+1001: Enemy Generation Error (Room::generateEnemyIntheRoom())
+1002: Event Generation Error (Room::generateEventIntheRoom())

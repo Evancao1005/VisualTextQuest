@@ -34,14 +34,17 @@
     <Filter Include="Header Files\GameRelated">
       <UniqueIdentifier>{4926e500-2937-4f9c-8f2f-37b88541c052}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameRelated\EnemyFactory">
-      <UniqueIdentifier>{bcf1b4a4-524a-44bb-8f10-f8c89a7b3620}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameRelated\Event">
       <UniqueIdentifier>{7092f79f-229b-44cc-90be-08d389b1c8d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\GameRelated\Game">
       <UniqueIdentifier>{0fbdcd9e-aac2-47d0-911b-9cfa54ab21bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameRelated\Room">
+      <UniqueIdentifier>{81065301-da8c-457b-bdf9-d6f2c46d0a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameRelated\EnemyFactory">
+      <UniqueIdentifier>{95af42f6-e1a4-4c20-99cb-8f2124596e61}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +69,6 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files\CharacterBased</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyFactory.h">
-      <Filter>Header Files\GameRelated\EnemyFactory</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -77,6 +77,12 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\GameRelated\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files\GameRelated\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
+      <Filter>Header Files\GameRelated\EnemyFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +107,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Header Files\CharacterBased</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyFactory.cpp">
-      <Filter>Header Files\GameRelated\EnemyFactory</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -113,12 +116,21 @@
     <ClCompile Include="Game.cpp">
       <Filter>Header Files\GameRelated\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Header Files\GameRelated\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
+      <Filter>Header Files\GameRelated\EnemyFactory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Vocations.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Events.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Text.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

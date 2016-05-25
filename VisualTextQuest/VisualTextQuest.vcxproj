@@ -120,23 +120,26 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="Vocation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GiantSpider.cpp" />
-    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="Vocation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Events.txt" />
+    <Text Include="Text.txt" />
     <Text Include="Vocations.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
