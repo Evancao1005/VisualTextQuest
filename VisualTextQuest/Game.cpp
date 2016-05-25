@@ -23,3 +23,7 @@ vector<Vocation*> Game::getVocations()
 {
 	return vocations;
 }
+
+Room* Game::getRoom() {
+	return room;
+}

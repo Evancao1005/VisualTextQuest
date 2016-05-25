@@ -122,6 +122,9 @@
     <ClCompile Include="EnemyFactory.cpp">
       <Filter>Header Files\GameRelated\EnemyFactory</Filter>
     </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Vocations.txt">

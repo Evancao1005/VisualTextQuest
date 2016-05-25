@@ -3,6 +3,8 @@
 // Created by Peter Hoghton on 22/04/2016
 // Tim 3/5/16 - some cleanup and refactoring with extra things we covered in lectures (factory, singleton, friend, operator<< override, etc)
 
+/*
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -22,6 +24,7 @@ Game game;
 Player* player = game.getPlayer();
 vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
+Room mazeRoom = game.getRoom();
 
 void main() {
 
@@ -106,6 +109,9 @@ void startGame() {
 
 	//Ignores any extra input (ensures extra input is not accidently read in by future 'cin' or 'getline' commands
 	cin.ignore();
+
+	//Generate the maze
+	generateMaze();
 
 	//Starts main game loop
 	if (continueChoice == 'y') {
@@ -347,3 +353,43 @@ int countLinesInFile(string file) {
 
 	return numLines;
 }
+
+void generateMaze() {
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			mazeRoom.room[i][j] = Room(i, j);
+		}
+	}
+
+	for (int i = 0; i < 21; i++)
+	{
+		for (int j = 0; j < 21; j++)
+		{
+			bool condition1 = (i % 2 == 0);
+			bool condition2 = (j % 2 == 0);
+			if (condition1 && condition2) {
+				cout << "\u25A0";
+			}
+			else if (condition1 && !condition2)
+			{
+					
+						cout << "\u25A0";
+	
+			}
+			else if (!condition1 && condition2)
+			{
+				cout << "ср";
+			}
+			else
+			{
+				cout << "\u25A1";
+			}
+		}
+		cout << endl;
+	}
+}
+
+*/

@@ -16,14 +16,22 @@ public:
 	int generateEnemyIntheRoom();
 	int generateEventIntheRoom();
 	bool canAccesstheGivenDirection(string);
+	Room getRoomFromArray(int x, int y);
+	void setRoomToArray(int x, int y, Room incomingRoom);
 	int getX();
 	int getY();
+	bool getDoorN();
+	bool getDoorW();
+	bool getDoorE();
+	bool getDoorS();
+	void setPlayer(int x, int y);
+	bool getPlayer();
+
 private:
 	int x, y;
-	bool door_N, door_S, door_W, door_E, visited;
+	bool door_N, door_S, door_W, door_E, visited, player;
 	vector<Event*> eventList;
 	vector<Enemy*> enemyList;
-
-	static Room room[9][9];
+	static Room roomArray[9][9];
 };
 #endif // ROOM_H

@@ -2,6 +2,7 @@
 #define ENEMYFACTORY_H
 #include "Enemy.h"
 
+
 // Singleton and factory patterns
 class EnemyFactory {
 private:
