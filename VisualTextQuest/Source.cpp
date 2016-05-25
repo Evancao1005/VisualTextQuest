@@ -17,7 +17,7 @@ vector<Event*> events = game.getEvents();
 Room* mazeRoom = game.getRoom();
 
 void drawMap() {
-	system("CLS");
+	system("cls");
 	for (int i = 0; i < 21; i++)
 	{
 		for (int j = 0; j < 21; j++)
@@ -31,7 +31,7 @@ void drawMap() {
 				}
 				else if (condition1 && !condition2)
 				{
-					if (mazeRoom->getRoomFromArray(i / 2 - 1, (j - 1) / 2).getDoorE())
+					if (mazeRoom->getRoomFromArray(i / 2 -1, (j - 1) / 2).getDoorS())
 					{
 						cout << "  ";
 					}
@@ -70,30 +70,37 @@ void drawMap() {
 	}
 }
 
+
+
 int main() {
 	srand(static_cast<unsigned>(time(NULL)));
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		for (int j = 0; j < 9; j++)
+		for (int j = 0; j < 10; j++)
 		{
 			Room cacheRoom(i, j);
 			mazeRoom->setRoomToArray(i, j, cacheRoom);
+			cout << endl;
 		}
 	}
+
+
 	int playerX = rand() % 10;
 	int playerY = rand() % 10;
 	mazeRoom->setPlayer(playerX, playerY);
 
 	string input;
+
+
 	while (true)
 	{
 		drawMap();
 		cin >> input;
 
-		
 
-		if (input == "N") {
+
+		if (input == "W") {
 			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorN()) {
 				mazeRoom->setPlayer(playerX, playerY);
 				playerX -= 1;
@@ -114,7 +121,7 @@ int main() {
 				cout << "There is no door in that direction";
 			}
 		}
-		else if (input == "E") {
+		else if (input == "D") {
 			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorE()) {
 				mazeRoom->setPlayer(playerX, playerY);
 				playerY += 1;
@@ -124,7 +131,7 @@ int main() {
 				cout << "There is no door in that direction";
 			}
 		}
-		else if (input == "W") {
+		else if (input == "A") {
 			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorW()) {
 				mazeRoom->setPlayer(playerX, playerY);
 				playerY -= 1;
@@ -134,7 +141,10 @@ int main() {
 				cout << "There is no door in that direction";
 			}
 		}
+
+		
 	}
 	system("Pause");
 }
+
 

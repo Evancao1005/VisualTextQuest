@@ -3,6 +3,7 @@
 #define ROOM_H
 
 #include <vector>
+#include <iostream>
 #include "Event.h"
 #include "EnemyFactory.h"
 

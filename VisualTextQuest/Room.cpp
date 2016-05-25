@@ -28,16 +28,52 @@ Room Room::getRoomFromArray(int x, int y) {
 
 void Room::setRoomToArray(int x, int y, Room incomingRoom) {
 	roomArray[x][y] = incomingRoom;
+	
+	if (x - 1 < 0) {
+		roomArray[x][y].door_N = false;
+	}
+	if (y - 1 < 0) {
+		roomArray[x][y].door_W = false;
+	}
 
+	
+	if (x > 0) {
+		roomArray[x][y].door_N = roomArray[x - 1][y].door_S;
+
+	}
+	if (y > 0) {
+		roomArray[x][y].door_W = roomArray[x][y - 1].door_E;
+	}
+
+
+	int isDoor = rand() % 2;
+	if (isDoor == 0) {
+		roomArray[x][y].door_S = true;
+	}
+	isDoor = rand() % 2;
+	if (isDoor == 0) {
+		roomArray[x][y].door_E = true;
+	}
+
+	if (x + 1 > 9) {
+		roomArray[x][y].door_S = false;
+	}
+	if (y + 1 > 9) {
+		roomArray[x][y].door_E = false;
+	}
+
+
+
+	/*
 	if ((!(x - 1 < 0)) && (!(y - 1 < 0))) {
-		if (roomArray[x][y - 1].door_E == true)
-		{
-			roomArray[x][y].door_W = true;
-		}
-		if (roomArray[x - 1][y].door_S == true)
-		{
-			roomArray[x][y].door_N = true;
-		}
+	if (roomArray[x][y - 1].door_E == true)
+	{
+	roomArray[x][y].door_W = true;
+	}
+	if (roomArray[x - 1][y].door_S == true)
+	{
+	roomArray[x][y].door_N = true;
+	}
 	}
 	else if (x - 1 < 0) { roomArray[x][y].door_N = false; }
 	else { roomArray[x][y].door_W = false; }
@@ -45,12 +81,14 @@ void Room::setRoomToArray(int x, int y, Room incomingRoom) {
 
 	int isDoor = rand() % 2;
 	if (isDoor == 0) {
-		roomArray[x][y].door_E = true;
+	roomArray[x][y].door_E = true;
 	}
 	isDoor = rand() % 2;
 	if (isDoor == 0) {
-		roomArray[x][y].door_S = true;
+	roomArray[x][y].door_S = true;
 	}
+	*/
+
 }
 
 void Room::setPlayer(int x, int y)
