@@ -1,7 +1,7 @@
 #include "Room.h"
 #include "Game.h"
 
-Room Room::roomArray[9][9];
+Room Room::roomArray[10][10];
 
 Room::Room() {
 

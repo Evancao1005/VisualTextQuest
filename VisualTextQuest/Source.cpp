@@ -53,6 +53,12 @@ void drawMap() {
 				{
 					if (mazeRoom->getRoomFromArray((i - 1) / 2, (j - 1) / 2).getPlayer()) {
 						cout << " P";
+
+						if (i == 1 && j == 19)
+						{
+							cout << ((j - 1) / 2);
+						}
+
 					}
 					else {
 						cout << "\u25A1";
@@ -81,10 +87,14 @@ int main() {
 		{
 			Room cacheRoom(i, j);
 			mazeRoom->setRoomToArray(i, j, cacheRoom);
-			cout << endl;
+			cout << j;
 		}
+		cout << endl;
 	}
 
+	mazeRoom->getRoomFromArray(0,9);
+	mazeRoom->getRoomFromArray(1,0);
+	
 
 	int playerX = rand() % 10;
 	int playerY = rand() % 10;
@@ -119,6 +129,7 @@ int main() {
 			}
 			else {
 				cout << "There is no door in that direction";
+				system("Pause");
 			}
 		}
 		else if (input == "D") {
@@ -129,6 +140,7 @@ int main() {
 			}
 			else {
 				cout << "There is no door in that direction";
+				system("Pause");
 			}
 		}
 		else if (input == "A") {
@@ -139,6 +151,7 @@ int main() {
 			}
 			else {
 				cout << "There is no door in that direction";
+				system("Pause");
 			}
 		}
 
