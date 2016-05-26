@@ -68,6 +68,12 @@ void startGame() {
 	}
 	myfile.close();
 
+
+	//Generate the maze
+	generateMaze();
+
+
+
 	cout << "Welcome to CPlusPlusQuest!" << endl;
 
 	continueChoice = 'x';
@@ -111,8 +117,7 @@ void startGame() {
 	//Ignores any extra input (ensures extra input is not accidently read in by future 'cin' or 'getline' commands
 	cin.ignore();
 
-	//Generate the maze
-	generateMaze();
+
 
 	//Starts main game loop
 	if (continueChoice == 'y') {
@@ -326,6 +331,8 @@ void loadGame() {
 		}
 	}
 
+	loadMap(stoi(index));
+
 	//Creates a new character object using stats read in from file
 	player = new Player(name, vocation);
 	player->setHealth(health);
@@ -378,16 +385,53 @@ void saveMap(int index) {
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			myfile << i << "," << j << "," << mazeRoom->getRoomFromArray(i, j).getDoorN() << ","
+			myfile << mazeRoom->getRoomFromArray(i, j).getDoorN() << ","
 				<< mazeRoom->getRoomFromArray(i, j).getDoorS() << ","
 				<< mazeRoom->getRoomFromArray(i, j).getDoorW() << ","
 				<< mazeRoom->getRoomFromArray(i, j).getDoorE() << ","
-				<< mazeRoom->getRoomFromArray(i, j).getVisited() << "\n";
+				<< mazeRoom->getRoomFromArray(i, j).getVisited() << ","
+				<< mazeRoom->getRoomFromArray(i, j).getPlayer() << "\n";
 		}
 	}
 }
 
+void loadMap(int index) {
+	stringstream stream;
+	string cache;
+	stream << index;
+	stream >> cache;
 
+
+	string N, S, W, E, p, v, line;
+	fstream myfile; 
+
+	myfile.open(cache + ".map");
+
+
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			getline(myfile, line);
+			stringstream ss(line);
+			getline(ss, N, ',');
+			getline(ss, S, ',');
+			getline(ss, W, ',');
+			getline(ss, E, ',');
+			getline(ss, v, ',');
+			getline(ss, p, '\n');
+
+			mazeRoom->setDoorN(i, j, N);
+			mazeRoom->setDoorS(i, j, S);
+			mazeRoom->setDoorW(i, j, W);
+			mazeRoom->setDoorE(i, j, E);
+			mazeRoom->getRoomFromArray(i, j).loadPlayerFromFile(i, j, p);
+			mazeRoom->getRoomFromArray(i, j).loadVisitedFromFile(i, j, v);
+
+
+		}
+	}
+}
 
 
 //Utility function that returns the number of lines in a given file
