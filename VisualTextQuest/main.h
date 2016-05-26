@@ -2,8 +2,8 @@
 // CPlusPlusQuest (A2 Sample Solution)
 // Created by Peter Hoghton on 22/04/2016
 
-/*
 
+/*
 #ifndef MAIN_H
 #define MAIN_H
 
@@ -18,6 +18,7 @@ void createCharacter();
 void loadGame();
 void saveGame();
 void generateMaze();
+void drawMap();
 int countLinesInFile(string file);
 
 #endif

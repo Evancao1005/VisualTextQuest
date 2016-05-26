@@ -24,7 +24,7 @@ Game game;
 Player* player = game.getPlayer();
 vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
-Room mazeRoom = game.getRoom();
+Room* mazeRoom = game.getRoom();
 
 void main() {
 
@@ -130,7 +130,9 @@ void startGame() {
 void gameLoop() {
 
 	char continueChoice = 'x';
-
+	
+	drawMap();
+	
 	do {
 		//25% chance of a fight occuring each round
 		int fightChance = rand() % 4;
@@ -355,41 +357,75 @@ int countLinesInFile(string file) {
 }
 
 void generateMaze() {
-
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			mazeRoom.room[i][j] = Room(i, j);
+			Room cacheRoom(i, j);
+			mazeRoom->setRoomToArray(i, j, cacheRoom);
 		}
 	}
+}
 
+void drawMap() {
+	system("cls");
 	for (int i = 0; i < 21; i++)
 	{
 		for (int j = 0; j < 21; j++)
 		{
 			bool condition1 = (i % 2 == 0);
 			bool condition2 = (j % 2 == 0);
-			if (condition1 && condition2) {
-				cout << "\u25A0";
-			}
-			else if (condition1 && !condition2)
-			{
-					
+
+			if (i*j != 0 && (i != 20 && j != 20)) {
+				if (condition1 && condition2) {
+					cout << "\u25A0";
+				}
+				else if (condition1 && !condition2)
+				{
+					if (mazeRoom->getRoomFromArray(i / 2 - 1, (j - 1) / 2).getDoorS())
+					{
+						cout << "  ";
+					}
+					else {
 						cout << "\u25A0";
-	
-			}
-			else if (!condition1 && condition2)
-			{
-				cout << "ср";
+					}
+				}
+				else if (!condition1 && condition2)
+				{
+					if (mazeRoom->getRoomFromArray((i - 1) / 2, j / 2 - 1).getDoorE())
+					{
+						cout << "  ";
+					}
+					else {
+						cout << "\u25A0";
+					}
+				}
+				else
+				{
+					if (mazeRoom->getRoomFromArray((i - 1) / 2, (j - 1) / 2).getPlayer()) {
+						cout << " P";
+
+						if (i == 1 && j == 19)
+						{
+							cout << ((j - 1) / 2);
+						}
+
+					}
+					else {
+						cout << "\u25A1";
+					}
+
+				}
 			}
 			else
 			{
-				cout << "\u25A1";
+				cout << "\u25A0";
 			}
+
 		}
 		cout << endl;
 	}
 }
+
 
 */

@@ -7,7 +7,7 @@ Room::Room() {
 
 }
 
-Room::Room(int arg_x, int arg_y) {
+Room::Room(int arg_x, int arg_y, vector<Event*> eventLoaded) {
 	//Initialize the coodinates
 	x = arg_x;
 	y = arg_y;
@@ -16,6 +16,9 @@ Room::Room(int arg_x, int arg_y) {
 	roomArray[x][y].door_W = false;
 	roomArray[x][y].door_S = false;
 	roomArray[x][y].door_N = false;
+
+	generateEventIntheRoom(eventLoaded);
+	generateEnemyIntheRoom();
 }
 
 Room::~Room(){
@@ -63,32 +66,6 @@ void Room::setRoomToArray(int x, int y, Room incomingRoom) {
 	}
 
 
-
-	/*
-	if ((!(x - 1 < 0)) && (!(y - 1 < 0))) {
-	if (roomArray[x][y - 1].door_E == true)
-	{
-	roomArray[x][y].door_W = true;
-	}
-	if (roomArray[x - 1][y].door_S == true)
-	{
-	roomArray[x][y].door_N = true;
-	}
-	}
-	else if (x - 1 < 0) { roomArray[x][y].door_N = false; }
-	else { roomArray[x][y].door_W = false; }
-
-
-	int isDoor = rand() % 2;
-	if (isDoor == 0) {
-	roomArray[x][y].door_E = true;
-	}
-	isDoor = rand() % 2;
-	if (isDoor == 0) {
-	roomArray[x][y].door_S = true;
-	}
-	*/
-
 }
 
 void Room::setPlayer(int x, int y)
@@ -135,11 +112,10 @@ int Room::generateEnemyIntheRoom() {
 	}
 }
 
-int Room::generateEventIntheRoom() {
+int Room::generateEventIntheRoom(vector<Event*> eventLoaded) {
 	try
 	{
-		Game game;
-		vector<Event*> events = game.getEvents();
+		vector<Event*> events = eventLoaded;
 		int numEvents = rand() % 3 + 1;
 
 		for (int i = 0; i < numEvents; i++) {

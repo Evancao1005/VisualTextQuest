@@ -12,10 +12,10 @@ using namespace std;
 class Room {
 public:
 	Room();
-	Room(int x, int y);
+	Room(int x, int y, vector<Event*>);
 	~Room();
 	int generateEnemyIntheRoom();
-	int generateEventIntheRoom();
+	int generateEventIntheRoom(vector<Event*>);
 	bool canAccesstheGivenDirection(string);
 	Room getRoomFromArray(int x, int y);
 	void setRoomToArray(int x, int y, Room incomingRoom);

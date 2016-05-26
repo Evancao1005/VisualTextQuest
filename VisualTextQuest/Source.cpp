@@ -1,5 +1,12 @@
-#include <time.h>
+
+
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <time.h>
+#include <vector>
+
+
 using namespace std;
 
 #include "Character.h"
@@ -10,12 +17,15 @@ using namespace std;
 #include "EnemyFactory.h"
 #include "Game.h"
 
+
+
+
 Game game;
 Player* player = game.getPlayer();
 vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
 Room* mazeRoom = game.getRoom();
-
+/*
 void drawMap() {
 	system("cls");
 	for (int i = 0; i < 21; i++)
@@ -76,20 +86,35 @@ void drawMap() {
 	}
 }
 
-
+*/
 
 int main() {
+
+	fstream myfile;
+	string vocation, description;
+	int health, strength, magic, healthModifier;
+	char comma, continueChoice;
+	string line;
+
+
+	myfile.open("events.txt");
+	while (getline(myfile, line)) {
+		stringstream ss(line);
+		getline(ss, description, ',');
+		ss >> healthModifier;
+		events.push_back(new Event(description, healthModifier));
+	}
+	myfile.close();
+
 	srand(static_cast<unsigned>(time(NULL)));
 
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			Room cacheRoom(i, j);
+			Room cacheRoom(i, j, events);
 			mazeRoom->setRoomToArray(i, j, cacheRoom);
-			cout << j;
 		}
-		cout << endl;
 	}
 
 	mazeRoom->getRoomFromArray(0,9);
@@ -103,13 +128,12 @@ int main() {
 	string input;
 
 
+
+	/*
 	while (true)
 	{
-		drawMap();
+
 		cin >> input;
-
-
-
 		if (input == "W") {
 			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorN()) {
 				mazeRoom->setPlayer(playerX, playerY);
@@ -153,11 +177,11 @@ int main() {
 				cout << "There is no door in that direction";
 				system("Pause");
 			}
-		}
-
-		
+		}	
 	}
+	*/
+
+
 	system("Pause");
 }
-
 
