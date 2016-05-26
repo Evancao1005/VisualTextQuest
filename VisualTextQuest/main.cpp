@@ -26,12 +26,10 @@ vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
 Room* mazeRoom = game.getRoom();
 
-
 int playerX;
 int playerY;
 int* pplayerX = &playerX;
 int* pplayerY = &playerY;
-
 
 void main() {
 
@@ -83,8 +81,6 @@ void startGame() {
 	playerY = rand() % 10;
 	mazeRoom->setPlayer(playerX, playerY);
 
-
-
 	cout << "Welcome to CPlusPlusQuest!" << endl;
 
 	continueChoice = 'x';
@@ -130,7 +126,6 @@ void startGame() {
 	cin.ignore();
 
 
-
 	//Starts main game loop
 	if (continueChoice == 'y') {
 		gameLoop();
@@ -148,12 +143,6 @@ void startGame() {
 void gameLoop() {
 
 	char continueChoice = 'x';
-
-
-
-
-	
-
 
 	do {
 		drawMap();
@@ -256,7 +245,6 @@ void fight(int x, int y) {
 		}
 	}
 }
-/*************************************************************************/
 
 
 //Creates a new character
@@ -351,23 +339,6 @@ void loadGame() {
 
 }
 
-
-/*
-void saveGame() {
-	ofstream ofs("\save\save.sav", ios::binary);
-	ofs.write((char *)&player, sizeof(player));
-}
-*/
-
-
-
-
-
-
-
-
-
-
 //Writes character stats to file
 
 void saveGame() {
@@ -409,7 +380,6 @@ void loadMap(int index) {
 	string cache;
 	stream << index;
 	stream >> cache;
-
 
 	string N, S, W, E, p, v, line;
 	fstream myfile; 
