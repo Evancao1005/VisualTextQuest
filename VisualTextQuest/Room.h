@@ -25,6 +25,8 @@ public:
 	bool getDoorW();
 	bool getDoorE();
 	bool getDoorS();
+	bool getVisited();
+	void setVisited(int, int);
 	void setPlayer(int x, int y);
 	bool getPlayer();
 	vector<Event*> getEventList();

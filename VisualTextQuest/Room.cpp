@@ -16,7 +16,7 @@ Room::Room(int arg_x, int arg_y, vector<Event*> eventLoaded) {
 	roomArray[x][y].door_W = false;
 	roomArray[x][y].door_S = false;
 	roomArray[x][y].door_N = false;
-
+	visited = false;
 	generateEventIntheRoom(eventLoaded);
 	generateEnemyIntheRoom();
 }
@@ -72,6 +72,7 @@ void Room::setPlayer(int x, int y)
 {
 	if (!roomArray[x][y].player) {
 		roomArray[x][y].player = true;
+		roomArray[x][y].visited = true;
 	}
 	else {
 		roomArray[x][y].player = false;
@@ -86,6 +87,8 @@ bool Room::getDoorE() { return door_E; }
 bool Room::getDoorW() { return door_W; }
 bool Room::getDoorS() { return door_S; }
 bool Room::getDoorN() { return door_N; }
+bool Room::getVisited() { return visited; }
+
 
 
 int Room::generateEnemyIntheRoom() {
@@ -125,4 +128,7 @@ int Room::generateEventIntheRoom(vector<Event*> eventLoaded) {
 void Room::clearRoom(int x, int y) {
 	roomArray[x][y].enemyList.clear();
 	roomArray[x][y].eventList.clear();
+}
+void Room::setVisited(int x, int y) {
+	roomArray[x][y].visited = true;
 }

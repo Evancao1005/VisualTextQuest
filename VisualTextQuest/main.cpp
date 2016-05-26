@@ -422,8 +422,10 @@ void drawMap() {
 						}
 
 					}
-					else {
+					else if (mazeRoom->getRoomFromArray((i - 1) / 2, (j - 1) / 2).getVisited()) {
 						cout << "\u25A1";
+					}else {
+						cout << "* ";
 					}
 
 				}
@@ -489,6 +491,18 @@ void playerWalk(int& playerX, int& playerY) {
 				cout << "There is no door in that direction";
 				system("Pause");
 			}
+		}
+		else if (input == "gg") {
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					mazeRoom->setVisited(i,j);
+				}
+			}
+			cout << "Cheat Enabled";
+			system("Pause");
+			break;
 		}
 	}
 	
