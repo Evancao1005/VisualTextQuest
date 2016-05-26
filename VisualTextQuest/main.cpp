@@ -26,6 +26,13 @@ vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
 Room* mazeRoom = game.getRoom();
 
+
+int playerX;
+int playerY;
+int* pplayerX = &playerX;
+int* pplayerY = &playerY;
+
+
 void main() {
 
 	//Initializes random seed
@@ -43,6 +50,7 @@ void startGame() {
 	string vocation, description;
 	int health, strength, magic, healthModifier;
 	char comma, continueChoice;
+	bool loaded = false;
 
 
 
@@ -71,6 +79,9 @@ void startGame() {
 
 	//Generate the maze
 	generateMaze();
+	playerX = rand() % 10;
+	playerY = rand() % 10;
+	mazeRoom->setPlayer(playerX, playerY);
 
 
 
@@ -93,6 +104,7 @@ void startGame() {
 
 		if (continueChoice == 'y') {
 			loadGame();
+			loaded = true;
 
 		}
 		else {
@@ -137,12 +149,9 @@ void gameLoop() {
 
 	char continueChoice = 'x';
 
-	int playerX = rand() % 10;
-	int playerY = rand() % 10;
-	int* pplayerX = &playerX;
-	int* pplayerY = &playerY;
 
-	mazeRoom->setPlayer(playerX, playerY);
+
+
 	
 
 
@@ -408,9 +417,9 @@ void loadMap(int index) {
 	myfile.open(cache + ".map");
 
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		for (int j = 0; j < 9; j++)
+		for (int j = 0; j < 10; j++)
 		{
 			getline(myfile, line);
 			stringstream ss(line);
@@ -420,14 +429,16 @@ void loadMap(int index) {
 			getline(ss, E, ',');
 			getline(ss, v, ',');
 			getline(ss, p, '\n');
-
 			mazeRoom->setDoorN(i, j, N);
 			mazeRoom->setDoorS(i, j, S);
 			mazeRoom->setDoorW(i, j, W);
 			mazeRoom->setDoorE(i, j, E);
-			mazeRoom->getRoomFromArray(i, j).loadPlayerFromFile(i, j, p);
-			mazeRoom->getRoomFromArray(i, j).loadVisitedFromFile(i, j, v);
-
+			mazeRoom->loadPlayerFromFile(i, j, p);
+			mazeRoom->loadVisitedFromFile(i, j, v);
+			if (stoi(p)==1) {
+				playerX = i;
+				playerY = j;
+			}
 
 		}
 	}
