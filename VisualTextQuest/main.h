@@ -18,6 +18,7 @@ void createCharacter();
 void loadGame();
 void saveGame();
 void saveMap(int);
+void loadMap(int);
 void generateMaze();
 void drawMap();
 void playerWalk(int&, int&);

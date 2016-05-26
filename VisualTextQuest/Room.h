@@ -21,10 +21,16 @@ public:
 	void setRoomToArray(int x, int y, Room incomingRoom);
 	int getX();
 	int getY();
+
 	bool getDoorN();
+	void setDoorN(int, int, string);
 	bool getDoorW();
+	void setDoorW(int, int, string);
 	bool getDoorE();
+	void setDoorE(int, int, string);
 	bool getDoorS();
+	void setDoorS(int, int, string);
+
 	bool getVisited();
 	void setVisited(int, int);
 	void setPlayer(int x, int y);
@@ -32,6 +38,8 @@ public:
 	vector<Event*> getEventList();
 	vector<Enemy*> getEnemyList();
 	void clearRoom(int, int);
+	void loadPlayerFromFile(int, int, string);
+	void loadVisitedFromFile(int, int, string);
 
 
 private:

@@ -77,8 +77,9 @@ void Room::setPlayer(int x, int y)
 	else {
 		roomArray[x][y].player = false;
 	}
-
 }
+
+
 
 bool Room::getPlayer() { return player; }
 int Room::getX() { return x; }
@@ -131,4 +132,32 @@ void Room::clearRoom(int x, int y) {
 }
 void Room::setVisited(int x, int y) {
 	roomArray[x][y].visited = true;
+}
+
+void Room::setDoorE(int x, int y, string str) {
+	int cache = stoi(str);
+	roomArray[x][y].door_E = cache;
+
+}
+void Room::setDoorW(int x, int y, string str) {
+	int cache = stoi(str);
+	roomArray[x][y].door_W = cache;
+
+}
+void Room::setDoorN(int x, int y, string str) {
+	int cache = stoi(str);
+	roomArray[x][y].door_N = cache;
+
+}
+void Room::setDoorS(int x, int y, string str) {
+	int cache = stoi(str);
+	roomArray[x][y].door_S = cache;
+}
+
+void Room::loadPlayerFromFile(int x, int y, string str) {
+	roomArray[x][y].player = stoi(str);
+}
+
+void Room::loadVisitedFromFile(int x, int y, string str) {
+	roomArray[x][y].visited = stoi(str);
 }
