@@ -16,7 +16,7 @@ public:
 	~Room();
 	int generateEnemyIntheRoom();
 	int generateEventIntheRoom(vector<Event*>);
-	bool canAccesstheGivenDirection(string);
+
 	Room getRoomFromArray(int x, int y);
 	void setRoomToArray(int x, int y, Room incomingRoom);
 	int getX();
@@ -29,6 +29,9 @@ public:
 	bool getPlayer();
 	vector<Event*> getEventList();
 	vector<Enemy*> getEnemyList();
+
+public:
+	void clearRoom(int, int);
 private:
 	int x, y;
 	bool door_N, door_S, door_W, door_E, visited, player;

@@ -88,16 +88,8 @@ bool Room::getDoorS() { return door_S; }
 bool Room::getDoorN() { return door_N; }
 
 
-
-bool Room::canAccesstheGivenDirection(string direction)
-{
-	if (direction == "N") { return door_N; }
-	else if (direction == "S") { return door_S; }
-	else if (direction == "W") { return door_W; }
-	else if (direction == "E") { return door_E; }
-}
-
 int Room::generateEnemyIntheRoom() {
+
 	try
 	{
 		int numEnemies = rand() % 3 + 1;
@@ -128,4 +120,9 @@ int Room::generateEventIntheRoom(vector<Event*> eventLoaded) {
 	{
 		return 1002;
 	}
+}
+
+void Room::clearRoom(int x, int y) {
+	roomArray[x][y].enemyList.clear();
+	roomArray[x][y].eventList.clear();
 }

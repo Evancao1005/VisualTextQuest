@@ -133,28 +133,23 @@ void gameLoop() {
 
 	int playerX = rand() % 10;
 	int playerY = rand() % 10;
+	int* pplayerX = &playerX;
+	int* pplayerY = &playerY;
+
 	mazeRoom->setPlayer(playerX, playerY);
 	
 
-	drawMap();
-	do {
 
-		playerWalk(playerX, playerY);
+	do {
+		drawMap();
+		playerWalk(*pplayerX, *pplayerY);
 		drawMap();
 		fight(playerX, playerY);
 
-		
-
-			
-
-
 		//Checks if player is still alive
 		if (player->getHealth() > 0) {
-
 			cout << player->getName() << " has " << player->getHealth() << " health remaining." << endl;
-
 			continueChoice = 'x';
-
 			while (continueChoice != 'y' && continueChoice != 'n') {
 				cout << "Would you like to continue? (y/n) ";
 				cin >> continueChoice;
@@ -174,6 +169,7 @@ void gameLoop() {
 			player->setHealth(player->getHealth() + roomEvents[i]->getHealthModifier());
 		}
 
+		mazeRoom->clearRoom(playerX, playerY);
 		
 	} while (player->getHealth() > 0 && continueChoice != 'n');
 
@@ -201,6 +197,7 @@ void fight(int x, int y) {
 	//Adds player to participants vector
 	participants.push_back(player);
 
+	if (mazeRoom->getRoomFromArray(x, y).getEnemyList().size() == 0) { return; }
 	for (int i = 0; i < mazeRoom->getRoomFromArray(x, y).getEnemyList().size(); i++)
 	{
 		participants.push_back(mazeRoom->getRoomFromArray(x, y).getEnemyList().at(i));
@@ -221,7 +218,6 @@ void fight(int x, int y) {
 				attacker->attack(stillAlive);
 			}
 		}
-
 		// remove dead participants
 		// (by extracting the ones that are alive into a new vector and then copying it back to the original)
 		vector<Character*> tmp;
@@ -235,6 +231,9 @@ void fight(int x, int y) {
 
 	cout << "The fight is over!" << endl;
 
+	
+	
+
 	//Iterates through the participants vector and deletes all participants (but not the player!)
 	for (Character* p : participants) {
 		if (p != player) {
@@ -242,6 +241,11 @@ void fight(int x, int y) {
 		}
 	}
 }
+/*************************************************************************/
+
+
+
+
 
 //Creates a new character
 void createCharacter() {
@@ -434,7 +438,7 @@ void drawMap() {
 	}
 }
 
-void playerWalk(int playerX, int playerY) {
+void playerWalk(int& playerX, int& playerY) {
 	string input;
 	while(true){
 		cin >> input;

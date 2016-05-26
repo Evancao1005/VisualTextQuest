@@ -19,7 +19,7 @@ void loadGame();
 void saveGame();
 void generateMaze();
 void drawMap();
-void playerWalk(int, int);
+void playerWalk(int&, int&);
 int countLinesInFile(string file);
 
 #endif
