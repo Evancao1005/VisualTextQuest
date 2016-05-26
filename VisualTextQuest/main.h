@@ -3,7 +3,7 @@
 // Created by Peter Hoghton on 22/04/2016
 
 
-/*
+
 #ifndef MAIN_H
 #define MAIN_H
 
@@ -13,15 +13,15 @@ using namespace std;
 
 void startGame();
 void gameLoop();
-void fight();
+void fight(int, int);
 void createCharacter();
 void loadGame();
 void saveGame();
 void generateMaze();
 void drawMap();
+void playerWalk(int, int);
 int countLinesInFile(string file);
 
 #endif
 
 
-*/

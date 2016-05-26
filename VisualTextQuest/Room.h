@@ -27,7 +27,8 @@ public:
 	bool getDoorS();
 	void setPlayer(int x, int y);
 	bool getPlayer();
-
+	vector<Event*> getEventList();
+	vector<Enemy*> getEnemyList();
 private:
 	int x, y;
 	bool door_N, door_S, door_W, door_E, visited, player;

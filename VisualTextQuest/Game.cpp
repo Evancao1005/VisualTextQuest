@@ -27,3 +27,11 @@ vector<Vocation*> Game::getVocations()
 Room* Game::getRoom() {
 	return room;
 }
+
+vector<Event*> Room::getEventList() {
+	return eventList;
+}
+
+vector<Enemy*> Room::getEnemyList() {
+	return enemyList;
+}

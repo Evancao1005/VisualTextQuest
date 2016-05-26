@@ -18,14 +18,14 @@ using namespace std;
 #include "Game.h"
 
 
-
+/*
 
 Game game;
 Player* player = game.getPlayer();
 vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
 Room* mazeRoom = game.getRoom();
-/*
+
 void drawMap() {
 	system("cls");
 	for (int i = 0; i < 21; i++)
@@ -88,7 +88,8 @@ void drawMap() {
 
 */
 
-int main() {
+/*
+int main2() {
 
 	fstream myfile;
 	string vocation, description;
@@ -179,9 +180,11 @@ int main() {
 			}
 		}	
 	}
-	*/
+	
 
 
 	system("Pause");
+	return 0;
 }
 
+*/

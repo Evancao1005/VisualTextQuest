@@ -3,7 +3,7 @@
 // Created by Peter Hoghton on 22/04/2016
 // Tim 3/5/16 - some cleanup and refactoring with extra things we covered in lectures (factory, singleton, friend, operator<< override, etc)
 
-/*
+
 
 #include <iostream>
 #include <fstream>
@@ -130,26 +130,23 @@ void startGame() {
 void gameLoop() {
 
 	char continueChoice = 'x';
+
+	int playerX = rand() % 10;
+	int playerY = rand() % 10;
+	mazeRoom->setPlayer(playerX, playerY);
 	
+
 	drawMap();
-	
 	do {
-		//25% chance of a fight occuring each round
-		int fightChance = rand() % 4;
 
-		//Start a fight
-		if (fightChance == 0) {
-			fight();
-		}
-		//Otherwise apply random event
-		else {
-			//Chooses a random number between 0 and the number of events
-			int randEvent = rand() % events.size();
+		playerWalk(playerX, playerY);
+		drawMap();
+		fight(playerX, playerY);
 
-			//Outputs random event information and modifies character's health accordingly
-			cout << events[randEvent]->getDescription() << endl;
-			player->setHealth(player->getHealth() + events[randEvent]->getHealthModifier());
-		}
+		
+
+			
+
 
 		//Checks if player is still alive
 		if (player->getHealth() > 0) {
@@ -169,6 +166,15 @@ void gameLoop() {
 			cout << player->getName() << " has no health remaining." << endl;
 		}
 
+		vector<Event*> roomEvents = mazeRoom->getRoomFromArray(playerX, playerY).getEventList();
+
+		for (int i = 0; i < mazeRoom->getRoomFromArray(playerX, playerY).getEventList().size(); i++)
+		{
+			cout << roomEvents[i]->getDescription() << endl;
+			player->setHealth(player->getHealth() + roomEvents[i]->getHealthModifier());
+		}
+
+		
 	} while (player->getHealth() > 0 && continueChoice != 'n');
 
 	continueChoice = 'x';
@@ -189,16 +195,15 @@ void gameLoop() {
 // Fight! Fight! Fight!
 // create some enemies and them together with the player into a vector of Character*
 // thanks to polymorphism nothing in this function is hard coded for any subtype of Character.
-void fight() {
+void fight(int x, int y) {
 	vector<Character*> participants;
-
+	
 	//Adds player to participants vector
 	participants.push_back(player);
 
-	//Adds random number of enemies (between 1 and 3) of random type with random stats to participants vector
-	int numEnemies = rand() % 3 + 1;
-	for (int i = 0; i < numEnemies; i++) {
-		participants.push_back(EnemyFactory::getInstance()->makeEnemy());
+	for (int i = 0; i < mazeRoom->getRoomFromArray(x, y).getEnemyList().size(); i++)
+	{
+		participants.push_back(mazeRoom->getRoomFromArray(x, y).getEnemyList().at(i));
 	}
 
 	cout << "A fight has started!" << endl;
@@ -361,10 +366,12 @@ void generateMaze() {
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			Room cacheRoom(i, j);
+			Room cacheRoom(i, j, events);
 			mazeRoom->setRoomToArray(i, j, cacheRoom);
 		}
 	}
+
+
 }
 
 void drawMap() {
@@ -427,5 +434,58 @@ void drawMap() {
 	}
 }
 
-
-*/
+void playerWalk(int playerX, int playerY) {
+	string input;
+	while(true){
+		cin >> input;
+		if (input == "W") {
+			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorN()) {
+				mazeRoom->setPlayer(playerX, playerY);
+				playerX -= 1;
+				mazeRoom->setPlayer(playerX, playerY);
+				break;
+			}
+			else {
+				cout << "There is no door in that direction";
+				system("Pause");
+			}
+		}
+		else if (input == "S") {
+			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorS()) {
+				mazeRoom->setPlayer(playerX, playerY);
+				playerX += 1;
+				mazeRoom->setPlayer(playerX, playerY);
+				break;
+			}
+			else {
+				cout << "There is no door in that direction";
+				system("Pause");
+			}
+		}
+		else if (input == "D") {
+			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorE()) {
+				mazeRoom->setPlayer(playerX, playerY);
+				playerY += 1;
+				mazeRoom->setPlayer(playerX, playerY);
+				break;
+			}
+			else {
+				cout << "There is no door in that direction";
+				system("Pause");
+			}
+		}
+		else if (input == "A") {
+			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorW()) {
+				mazeRoom->setPlayer(playerX, playerY);
+				playerY -= 1;
+				mazeRoom->setPlayer(playerX, playerY);
+				break;
+			}
+			else {
+				cout << "There is no door in that direction";
+				system("Pause");
+			}
+		}
+	}
+	
+}
