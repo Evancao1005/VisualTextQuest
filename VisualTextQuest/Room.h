@@ -31,14 +31,15 @@ public:
 	bool getPlayer();
 	vector<Event*> getEventList();
 	vector<Enemy*> getEnemyList();
-
-public:
 	void clearRoom(int, int);
+
+
 private:
 	int x, y;
 	bool door_N, door_S, door_W, door_E, visited, player;
 	vector<Event*> eventList;
 	vector<Enemy*> enemyList;
 	static Room roomArray[10][10];
+
 };
 #endif // ROOM_H

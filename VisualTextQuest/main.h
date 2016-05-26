@@ -17,6 +17,7 @@ void fight(int, int);
 void createCharacter();
 void loadGame();
 void saveGame();
+void saveMap(int);
 void generateMaze();
 void drawMap();
 void playerWalk(int&, int&);

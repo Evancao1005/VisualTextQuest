@@ -87,6 +87,7 @@ void startGame() {
 
 		if (continueChoice == 'y') {
 			loadGame();
+
 		}
 		else {
 			createCharacter();
@@ -244,9 +245,6 @@ void fight(int x, int y) {
 /*************************************************************************/
 
 
-
-
-
 //Creates a new character
 void createCharacter() {
 
@@ -275,18 +273,19 @@ void createCharacter() {
 
 	//Creates a new character object based on nameInput and inputChoice (see above)
 	player = new Player(nameInput, vocations[inputChoice - 1]);
-
-	saveGame();
 }
+
+
 
 //Reads in existing character stats from file
 void loadGame() {
 
 	fstream myfile;
-	string name, vocationType;
+	string name, vocationType, index;
 	int health, strength, magic;
 	int inputChoice = 0;
 	char comma;
+
 
 	while (inputChoice < 1 || inputChoice > countLinesInFile("saves.txt")) {
 
@@ -294,14 +293,14 @@ void loadGame() {
 
 		//Iterates through the saves text file and outputs each character
 		myfile.open("saves.txt");
-		int lineNumber = 0;
+
 		string line;
 		while (getline(myfile, line)) {
 			stringstream ss(line);
+			getline(ss, index, ',');
 			getline(ss, name, ',');
 			getline(ss, vocationType, ',');
-			cout << lineNumber + 1 << ": " << name << " the " << vocationType << endl;
-			lineNumber++;
+			cout << index << ": " << name << " the " << vocationType << endl;
 		}
 		myfile.close();
 
@@ -315,6 +314,7 @@ void loadGame() {
 	}
 
 	//Reads in stats for character based on inputChoice (see above)
+	getline(myfile, index, ',');
 	getline(myfile, name, ',');
 	getline(myfile, vocationType, ',');
 	myfile >> health >> comma >> strength >> comma >> magic;
@@ -331,23 +331,64 @@ void loadGame() {
 	player->setHealth(health);
 	player->setStrength(strength);
 	player->setMagic(magic);
-
 	cout << "Load successful!" << endl;
 
 }
 
+
+/*
+void saveGame() {
+	ofstream ofs("\save\save.sav", ios::binary);
+	ofs.write((char *)&player, sizeof(player));
+}
+*/
+
+
+
+
+
+
+
+
+
+
 //Writes character stats to file
+
 void saveGame() {
 
 	fstream myfile;
-
+	int index = countLinesInFile("saves.txt") + 1;
 	//Opens file in 'append' mode (meaning it will always write to the end of the file)
 	myfile.open("saves.txt", ios::app);
-	myfile << player->getName() << "," << (*player->getVocation()) << "," << player->getHealth() << "," << player->getStrength() << "," << player->getMagic() << "\n";
+	myfile << index << "," << player->getName() << "," << (*player->getVocation()) << "," << player->getHealth() << "," << player->getStrength() << "," << player->getMagic() << "\n";
 	myfile.close();
-
+	saveMap(index);
 	cout << "Save successful!" << endl;
 }
+
+
+void saveMap(int index) {
+	fstream myfile;
+	stringstream stream;
+	string cache;
+	stream << index;
+	stream >> cache;
+	myfile.open(cache + ".map", ios::out);
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			myfile << i << "," << j << "," << mazeRoom->getRoomFromArray(i, j).getDoorN() << ","
+				<< mazeRoom->getRoomFromArray(i, j).getDoorS() << ","
+				<< mazeRoom->getRoomFromArray(i, j).getDoorW() << ","
+				<< mazeRoom->getRoomFromArray(i, j).getDoorE() << ","
+				<< mazeRoom->getRoomFromArray(i, j).getVisited() << "\n";
+		}
+	}
+}
+
+
+
 
 //Utility function that returns the number of lines in a given file
 int countLinesInFile(string file) {
