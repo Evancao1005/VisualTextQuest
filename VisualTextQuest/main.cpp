@@ -143,10 +143,12 @@ void gameLoop() {
 	char continueChoice = 'x';
 
 	do {
-		drawMap();
-		playerWalk(*pplayerX, *pplayerY);
-		drawMap();
-		drawNavMap(*pplayerX, *pplayerY);
+		//drawMap();
+		//playerWalk(*pplayerX, *pplayerY);
+		//drawMap();
+
+		insideARoom(*pplayerX, *pplayerY, 0);
+		
 
 		
 
@@ -507,64 +509,262 @@ void drawMap() {
 	}
 }
 
+
+
+
+
+
+/*
+void playerWalk(int& playerX, int& playerY) {
+string input;
+while(true){
+cin >> input;
+if (input == "W") {
+if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorN()) {
+mazeRoom->setPlayer(playerX, playerY);
+playerX -= 1;
+mazeRoom->setPlayer(playerX, playerY);
+break;
+}
+else {
+cout << "There is no door in that direction";
+system("Pause");
+}
+}
+else if (input == "S") {
+if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorS()) {
+mazeRoom->setPlayer(playerX, playerY);
+playerX += 1;
+mazeRoom->setPlayer(playerX, playerY);
+break;
+}
+else {
+cout << "There is no door in that direction";
+system("Pause");
+}
+}
+else if (input == "D") {
+if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorE()) {
+mazeRoom->setPlayer(playerX, playerY);
+playerY += 1;
+mazeRoom->setPlayer(playerX, playerY);
+break;
+}
+else {
+cout << "There is no door in that direction";
+system("Pause");
+}
+}
+else if (input == "A") {
+if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorW()) {
+mazeRoom->setPlayer(playerX, playerY);
+playerY -= 1;
+mazeRoom->setPlayer(playerX, playerY);
+break;
+}
+else {
+cout << "There is no door in that direction";
+system("Pause");
+}
+}
+else if (input == "gg") {
+for (int i = 0; i < 10; i++)
+{
+for (int j = 0; j < 10; j++)
+{
+mazeRoom->setVisited(i,j);
+}
+}
+cout << "Cheat Enabled";
+system("Pause");
+break;
+}
+}
+
+}
+
+*/
+
+
+
+void drawNavMap(int roomX, int roomY, int playerX, int playerY) {
+	drawMap();
+	cout << endl;
+	bool N = mazeRoom->getRoomFromArray(roomX, roomY).getDoorN();
+	bool S = mazeRoom->getRoomFromArray(roomX, roomY).getDoorS();
+	bool W = mazeRoom->getRoomFromArray(roomX, roomY).getDoorW();
+	bool E = mazeRoom->getRoomFromArray(roomX, roomY).getDoorE();
+
+
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			if (i == playerX && j == playerY) {
+				cout << " P";
+			}
+			else {
+				if ((i*j == 0) || (i*j % 6 == 0))
+				{
+					if ((j == 3 && i == 0) && N) {
+						cout << "  ";
+					}
+					else if ((j == 3 && i == 6) && S) {
+						cout << "  ";
+					}
+					else if ((i == 3 && j == 0) && W) {
+						cout << "  ";
+					}
+					else if ((i == 3 && (j == 6)) && E) {
+						cout << "  ";
+					}
+					else {
+						cout << "\u25A0";
+					}
+				}
+				else {
+					cout << "  ";
+				}
+			}
+		}
+		cout << endl;
+	}
+
+
+
+}
+
+
+
+
+int insideARoom(int &roomX, int &roomY, int comingFrom) {
+	
+	//0: in the room, 1: North, 2:South, 3: West, 4:East
+	int playerX, playerY;
+
+	mazeRoom->setPlayer(roomX, roomY);
+
+	if (comingFrom == 1) {
+		playerX = 0; playerY = 3;
+	}else if (comingFrom == 2) {
+		playerX = 6; playerY = 3;
+	}
+	else if (comingFrom == 3) {
+		playerX = 3; playerY = 0;
+	}
+	else if(comingFrom == 4) {
+		playerX = 3; playerY = 6;
+	}
+	else {
+		playerX = 1; playerY = 1;
+	}
+
+	while (true) {
+		drawNavMap(roomX, roomY, playerX, playerY);
+		playerWalk(playerX, playerY);
+
+
+		//accessing door
+		if (playerX == 3) {
+			if (playerY <= 0) {
+				//access the west door
+				if (mazeRoom->getRoomFromArray(roomX, roomY).getDoorW())
+				{
+					mazeRoom->setPlayer(roomX, roomY);
+					roomY -= 1;
+					return insideARoom(roomX, roomY, 4);
+				}
+				else {
+					cout << "There is no door here!" << endl;
+					//playerY += 1;
+				}
+			}
+			else if (playerY >= 6) {
+				//access the east door
+				if (mazeRoom->getRoomFromArray(roomX, roomY).getDoorE())
+				{
+					mazeRoom->setPlayer(roomX, roomY);
+					roomY += 1;
+					return insideARoom(roomX, roomY, 3);
+
+				}
+				else {
+					cout << "There is no door here!" << endl;
+					//playerY -= 1;
+				}
+			}
+		}
+		else if (playerY == 3) {
+			if (playerX <= 0) {
+				//access the north door
+				if (mazeRoom->getRoomFromArray(roomX, roomY).getDoorN())
+				{
+					mazeRoom->setPlayer(roomX, roomY);
+					roomX -= 1;
+					return insideARoom(roomX, roomY, 2);
+
+				}
+				else {
+					cout << "There is no door here!" << endl;
+					//playerX += 1;
+				}
+			}
+			else if (playerX >= 6) {
+				//access the south door
+				if (mazeRoom->getRoomFromArray(roomX, roomY).getDoorS())
+				{
+					mazeRoom->setPlayer(roomX, roomY);
+					roomX += 1;
+					return insideARoom(roomX, roomY, 1);
+
+				}
+				else {
+					cout << "There is no door here!" << endl;
+					//playerX -= 1;
+				}
+			}
+		}
+
+		//accessing wall
+		if (playerX == 0) { playerX += 1; }
+		if (playerX == 6) { playerX -= 1; }
+		if (playerY == 0) { playerY += 1; }
+		if (playerY == 6) { playerY -= 1; }
+
+
+	}
+
+	fight(roomX, roomY);
+
+	return 0;
+}
+
 void playerWalk(int& playerX, int& playerY) {
 	string input;
-	while(true){
+	while (true) {
 		cin >> input;
 		if (input == "W") {
-			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorN()) {
-				mazeRoom->setPlayer(playerX, playerY);
 				playerX -= 1;
-				mazeRoom->setPlayer(playerX, playerY);
 				break;
-			}
-			else {
-				cout << "There is no door in that direction";
-				system("Pause");
-			}
 		}
 		else if (input == "S") {
-			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorS()) {
-				mazeRoom->setPlayer(playerX, playerY);
 				playerX += 1;
-				mazeRoom->setPlayer(playerX, playerY);
 				break;
-			}
-			else {
-				cout << "There is no door in that direction";
-				system("Pause");
-			}
 		}
 		else if (input == "D") {
-			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorE()) {
-				mazeRoom->setPlayer(playerX, playerY);
 				playerY += 1;
-				mazeRoom->setPlayer(playerX, playerY);
 				break;
-			}
-			else {
-				cout << "There is no door in that direction";
-				system("Pause");
-			}
 		}
 		else if (input == "A") {
-			if (mazeRoom->getRoomFromArray(playerX, playerY).getDoorW()) {
-				mazeRoom->setPlayer(playerX, playerY);
 				playerY -= 1;
-				mazeRoom->setPlayer(playerX, playerY);
 				break;
-			}
-			else {
-				cout << "There is no door in that direction";
-				system("Pause");
-			}
 		}
 		else if (input == "gg") {
 			for (int i = 0; i < 10; i++)
 			{
 				for (int j = 0; j < 10; j++)
 				{
-					mazeRoom->setVisited(i,j);
+					mazeRoom->setVisited(i, j);
 				}
 			}
 			cout << "Cheat Enabled";
@@ -572,46 +772,6 @@ void playerWalk(int& playerX, int& playerY) {
 			break;
 		}
 	}
-	
-}
 
-
-void drawNavMap(int roomX, int roomY) {
-	cout << endl;
-	bool N = mazeRoom->getRoomFromArray(roomX, roomY).getDoorN();
-	bool S = mazeRoom->getRoomFromArray(roomX, roomY).getDoorS();
-	bool W = mazeRoom->getRoomFromArray(roomX, roomY).getDoorW();
-	bool E = mazeRoom->getRoomFromArray(roomX, roomY).getDoorE();
-
-	for (int i = 0; i < 7; i++)
-	{
-		for (int j = 0; j < 7; j++)
-		{
-			if ((i*j == 0) || (i*j % 6 == 0))
-			{
-				if ((j == 3 && i == 0) && N) {
-					cout << "  ";
-				}
-				else if ((j == 3 && i == 6) && S) {
-					cout << "  ";
-				}
-				else if ((i == 3 && j == 0) && W) {
-					cout << "  ";
-				}
-				else if ((i == 3 && (j == 6)) && E) {
-					cout << "  ";
-				}
-				else {
-					cout << "\u25A0";
-				}
-			}
-			else {
-				cout << "  ";
-			}
-		}
-		cout << endl;
-	}
-
-	fight(roomX, roomY);
 
 }
