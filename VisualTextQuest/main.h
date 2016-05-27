@@ -19,10 +19,11 @@ void loadGame();
 void saveGame();
 void saveMap(int);
 void loadMap(int);
-void drawNavMap(int, int);
+void drawNavMap(int, int, int, int);
 void generateMaze();
 void drawMap();
 void playerWalk(int&, int&);
+int insideARoom(int&, int&, int);
 int countLinesInFile(string file);
 
 #endif

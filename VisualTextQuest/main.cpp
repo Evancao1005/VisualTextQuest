@@ -642,7 +642,7 @@ int insideARoom(int &roomX, int &roomY, int comingFrom) {
 	//0: in the room, 1: North, 2:South, 3: West, 4:East
 	int playerX, playerY;
 
-	mazeRoom->setPlayer(roomX, roomY);
+	if (comingFrom != 0)(mazeRoom->setPlayer(roomX, roomY));
 
 	if (comingFrom == 1) {
 		playerX = 0; playerY = 3;
