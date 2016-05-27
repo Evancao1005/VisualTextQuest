@@ -26,10 +26,8 @@ vector<Vocation*> vocations = game.getVocations();
 vector<Event*> events = game.getEvents();
 Room* mazeRoom = game.getRoom();
 
-int playerX;
-int playerY;
-int* pplayerX = &playerX;
-int* pplayerY = &playerY;
+int* pplayerX = game.getPlayerX();
+int* pplayerY = game.getPlayerY();
 
 void main() {
 
@@ -77,9 +75,9 @@ void startGame() {
 
 	//Generate the maze
 	generateMaze();
-	playerX = rand() % 10;
-	playerY = rand() % 10;
-	mazeRoom->setPlayer(playerX, playerY);
+	*pplayerX = rand() % 10;
+	*pplayerY = rand() % 10;
+	mazeRoom->setPlayer(*pplayerX, *pplayerY);
 
 	cout << "Welcome to CPlusPlusQuest!" << endl;
 
@@ -148,7 +146,7 @@ void gameLoop() {
 		drawMap();
 		playerWalk(*pplayerX, *pplayerY);
 		drawMap();
-		fight(playerX, playerY);
+		fight(*pplayerX, *pplayerY);
 
 		//Checks if player is still alive
 		if (player->getHealth() > 0) {
@@ -165,15 +163,15 @@ void gameLoop() {
 			cout << player->getName() << " has no health remaining." << endl;
 		}
 
-		vector<Event*> roomEvents = mazeRoom->getRoomFromArray(playerX, playerY).getEventList();
+		vector<Event*> roomEvents = mazeRoom->getRoomFromArray(*pplayerX, *pplayerY).getEventList();
 
-		for (int i = 0; i < mazeRoom->getRoomFromArray(playerX, playerY).getEventList().size(); i++)
+		for (int i = 0; i < mazeRoom->getRoomFromArray(*pplayerX, *pplayerY).getEventList().size(); i++)
 		{
 			cout << roomEvents[i]->getDescription() << endl;
 			player->setHealth(player->getHealth() + roomEvents[i]->getHealthModifier());
 		}
 
-		mazeRoom->clearRoom(playerX, playerY);
+		mazeRoom->clearRoom(*pplayerX, *pplayerY);
 		
 	} while (player->getHealth() > 0 && continueChoice != 'n');
 
@@ -406,8 +404,8 @@ void loadMap(int index) {
 			mazeRoom->loadPlayerFromFile(i, j, p);
 			mazeRoom->loadVisitedFromFile(i, j, v);
 			if (stoi(p)==1) {
-				playerX = i;
-				playerY = j;
+				*pplayerX = i;
+				*pplayerY = j;
 			}
 
 		}

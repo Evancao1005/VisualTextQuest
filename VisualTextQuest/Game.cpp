@@ -35,3 +35,14 @@ vector<Event*> Room::getEventList() {
 vector<Enemy*> Room::getEnemyList() {
 	return enemyList;
 }
+
+
+int* Game::getPlayerY() {
+	return &playerY;
+}
+
+
+int* Game::getPlayerX()
+{
+	return &playerX;
+}

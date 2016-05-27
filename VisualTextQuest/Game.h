@@ -14,6 +14,8 @@ private:
 	vector<Vocation*> vocations;
 	vector<Event*> events;
 	Room* room;
+	int playerX;
+	int playerY;
 public:
 	Game();
 	~Game();
@@ -21,6 +23,8 @@ public:
 	vector<Vocation*> getVocations();
 	vector<Event*> getEvents();
 	Room* getRoom();
+	int* getPlayerX();
+	int* getPlayerY();
 };
 
 #endif // ! GAME_H
