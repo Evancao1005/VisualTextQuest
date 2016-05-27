@@ -146,7 +146,9 @@ void gameLoop() {
 		drawMap();
 		playerWalk(*pplayerX, *pplayerY);
 		drawMap();
-		fight(*pplayerX, *pplayerY);
+		drawNavMap(*pplayerX, *pplayerY);
+
+		
 
 		//Checks if player is still alive
 		if (player->getHealth() > 0) {
@@ -408,6 +410,7 @@ void loadMap(int index) {
 				*pplayerY = j;
 			}
 
+
 		}
 	}
 }
@@ -570,4 +573,45 @@ void playerWalk(int& playerX, int& playerY) {
 		}
 	}
 	
+}
+
+
+void drawNavMap(int roomX, int roomY) {
+	cout << endl;
+	bool N = mazeRoom->getRoomFromArray(roomX, roomY).getDoorN();
+	bool S = mazeRoom->getRoomFromArray(roomX, roomY).getDoorS();
+	bool W = mazeRoom->getRoomFromArray(roomX, roomY).getDoorW();
+	bool E = mazeRoom->getRoomFromArray(roomX, roomY).getDoorE();
+
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			if ((i*j == 0) || (i*j % 6 == 0))
+			{
+				if ((j == 3 && i == 0) && N) {
+					cout << "  ";
+				}
+				else if ((j == 3 && i == 6) && S) {
+					cout << "  ";
+				}
+				else if ((i == 3 && j == 0) && W) {
+					cout << "  ";
+				}
+				else if ((i == 3 && (j == 6)) && E) {
+					cout << "  ";
+				}
+				else {
+					cout << "\u25A0";
+				}
+			}
+			else {
+				cout << "  ";
+			}
+		}
+		cout << endl;
+	}
+
+	fight(roomX, roomY);
+
 }

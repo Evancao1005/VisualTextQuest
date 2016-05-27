@@ -117,6 +117,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="GiantSpider.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Player.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GiantSpider.cpp" />
