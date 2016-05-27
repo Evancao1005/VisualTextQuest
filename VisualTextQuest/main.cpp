@@ -175,7 +175,7 @@ void gameLoop() {
 			player->setHealth(player->getHealth() + roomEvents[i]->getHealthModifier());
 		}
 
-		mazeRoom->clearRoom(*pplayerX, *pplayerY);
+
 		
 	} while (player->getHealth() > 0 && continueChoice != 'n');
 
@@ -246,6 +246,8 @@ void fight(int x, int y) {
 			delete p;
 		}
 	}
+
+	mazeRoom->clearRoom(x, y);
 }
 
 
@@ -587,9 +589,12 @@ break;
 
 
 
-void drawNavMap(int roomX, int roomY, int playerX, int playerY) {
+void drawNavMap(int roomX, int roomY, int playerX, int playerY, int enemyX, int enemyY) {
 	drawMap();
 	cout << endl;
+
+	if (mazeRoom->getRoomFromArray(roomX, roomY).getEnemyList().size() == 0) { enemyX = -1; enemyY = -1; }
+
 	bool N = mazeRoom->getRoomFromArray(roomX, roomY).getDoorN();
 	bool S = mazeRoom->getRoomFromArray(roomX, roomY).getDoorS();
 	bool W = mazeRoom->getRoomFromArray(roomX, roomY).getDoorW();
@@ -603,7 +608,10 @@ void drawNavMap(int roomX, int roomY, int playerX, int playerY) {
 			if (i == playerX && j == playerY) {
 				cout << " P";
 			}
-			else {
+			else if (i == enemyX&&j == enemyY) {
+				cout << " E";
+			}
+			else{
 				if ((i*j == 0) || (i*j % 6 == 0))
 				{
 					if ((j == 3 && i == 0) && N) {
@@ -641,6 +649,14 @@ int insideARoom(int &roomX, int &roomY, int comingFrom) {
 	
 	//0: in the room, 1: North, 2:South, 3: West, 4:East
 	int playerX, playerY;
+	int enemyX = -1, enemyY = -1;
+
+
+	if (mazeRoom->getRoomFromArray(roomX, roomY).getEnemyList().size() != 0)
+	{
+		enemyX = rand() % 5 + 1;
+		enemyY = rand() % 5 + 1;
+	}
 
 	if (comingFrom != 0)(mazeRoom->setPlayer(roomX, roomY));
 
@@ -660,9 +676,13 @@ int insideARoom(int &roomX, int &roomY, int comingFrom) {
 	}
 
 	while (true) {
-		drawNavMap(roomX, roomY, playerX, playerY);
+		drawNavMap(roomX, roomY, playerX, playerY, enemyX, enemyY);
 		playerWalk(playerX, playerY);
 
+		if(playerX == enemyX && playerY==enemyY)
+		{
+			fight(roomX, roomY);
+		}
 
 		//accessing door
 		if (playerX == 3) {
