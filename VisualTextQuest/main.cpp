@@ -140,58 +140,15 @@ void startGame() {
 //The main game loop
 void gameLoop() {
 
-	char continueChoice = 'x';
-
-	do {
-		//drawMap();
-		//playerWalk(*pplayerX, *pplayerY);
-		//drawMap();
-
-		insideARoom(*pplayerX, *pplayerY, 0);
-		
-
-		
-
-		//Checks if player is still alive
-		if (player->getHealth() > 0) {
-			cout << player->getName() << " has " << player->getHealth() << " health remaining." << endl;
-			continueChoice = 'x';
-			while (continueChoice != 'y' && continueChoice != 'n') {
-				cout << "Would you like to continue? (y/n) ";
-				cin >> continueChoice;
-			}
-		}
-		//Player is dead
-		else {
-			player->setHealth(0);
-			cout << player->getName() << " has no health remaining." << endl;
-		}
-
-		vector<Event*> roomEvents = mazeRoom->getRoomFromArray(*pplayerX, *pplayerY).getEventList();
-
-		for (int i = 0; i < mazeRoom->getRoomFromArray(*pplayerX, *pplayerY).getEventList().size(); i++)
-		{
-			cout << roomEvents[i]->getDescription() << endl;
-			player->setHealth(player->getHealth() + roomEvents[i]->getHealthModifier());
-		}
 
 
-		
-	} while (player->getHealth() > 0 && continueChoice != 'n');
+	insideARoom(*pplayerX, *pplayerY, 0);
 
-	continueChoice = 'x';
 
-	//Only allow saving if player is still alive (prevents being able to load a dead character next time)
-	if (player->getHealth() > 0) {
-		while (continueChoice != 'y' && continueChoice != 'n') {
-			cout << "Would you like to save your game? (y/n) ";
-			cin >> continueChoice;
-		}
-	}
 
-	if (continueChoice == 'y') {
-		saveGame();
-	}
+	
+
+
 }
 
 // Fight! Fight! Fight!
@@ -247,7 +204,7 @@ void fight(int x, int y) {
 		}
 	}
 
-	mazeRoom->clearRoom(x, y);
+
 }
 
 
@@ -682,6 +639,52 @@ int insideARoom(int &roomX, int &roomY, int comingFrom) {
 		if(playerX == enemyX && playerY==enemyY)
 		{
 			fight(roomX, roomY);
+
+			char continueChoice = 'x';
+			//Checks if player is still alive
+			if (player->getHealth() > 0) {
+				cout << player->getName() << " has " << player->getHealth() << " health remaining." << endl;
+				continueChoice = 'x';
+				while (continueChoice != 'y' && continueChoice != 'n') {
+					cout << "Would you like to continue? (y/n) ";
+					cin >> continueChoice;
+				}
+			}
+			//Player is dead
+			else {
+				player->setHealth(0);
+				cout << player->getName() << " has no health remaining." << endl;
+				return 0;
+			}
+
+
+
+
+			vector<Event*> roomEvents = mazeRoom->getRoomFromArray(roomX, roomY).getEventList();
+			for (int i = 0; i < mazeRoom->getRoomFromArray(roomX, roomY).getEventList().size(); i++)
+			{
+				cout << "Special Event Time~~~!!!" << endl;
+				cout << roomEvents[i]->getDescription() << endl;
+				player->setHealth(player->getHealth() + roomEvents[i]->getHealthModifier());
+			}
+
+			system("Pause");
+			///////////////////
+			mazeRoom->clearRoom(roomX, roomY);
+			if (player->getHealth() > 0 && continueChoice == 'n') {
+				continueChoice = 'x';
+				//Only allow saving if player is still alive (prevents being able to load a dead character next time)
+				if (player->getHealth() > 0) {
+					while (continueChoice != 'y' && continueChoice != 'n') {
+						cout << "Would you like to save your game? (y/n) ";
+						cin >> continueChoice;
+					}
+				}
+				if (continueChoice == 'y') {
+					saveGame();
+				}
+				return 0;
+			}
 		}
 
 		//accessing door
@@ -722,7 +725,7 @@ int insideARoom(int &roomX, int &roomY, int comingFrom) {
 					mazeRoom->setPlayer(roomX, roomY);
 					roomX -= 1;
 					return insideARoom(roomX, roomY, 2);
-
+					
 				}
 				else {
 					cout << "There is no door here!" << endl;
@@ -754,9 +757,8 @@ int insideARoom(int &roomX, int &roomY, int comingFrom) {
 
 	}
 
-	fight(roomX, roomY);
 
-	return 0;
+
 }
 
 void playerWalk(int& playerX, int& playerY) {
